@@ -2,7 +2,7 @@ resource "aws_kms_key" "key_kms" {
   count = "${var.sse_kms}"
   description         = "Key for ${var.name_prefix}-kops-state${var.name_suffix}"
   enable_key_rotation = true
-  tags = "${var.input_tags}"
+  tags = "${local.common_tags}"
 }
 
 resource "aws_kms_alias" "key_alias_kms" {
@@ -38,7 +38,7 @@ resource "aws_s3_bucket" "bucket_kms" {
     }
   }
 
-  tags = "${var.input_tags}"
+  tags = "${local.common_tags"
 }
 
 data "aws_iam_policy_document" "bucket_policy_kms" {
